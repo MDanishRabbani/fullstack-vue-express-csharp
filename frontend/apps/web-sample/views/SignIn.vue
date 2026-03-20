@@ -22,7 +22,6 @@
         </div>
       </div>
       <p v-if="errorMessage">{{ errorMessage }}</p>
-      <p>{{ isMobile ? 'Mobile' : 'Not Mobile' }}</p>
     </form>
   </div>
 </template>
@@ -31,7 +30,6 @@
 import { ref, onMounted, onBeforeUnmount, onUnmounted } from 'vue'
 import { useMainStore } from '../store.js'
 import { useRoute } from 'vue-router'
-import { useMediaQuery } from '../../common/plugins/useMediaQuery'
 
 import parseJwt from '@es-labs/esm/parse-jwt.js'
 
@@ -52,8 +50,6 @@ const otp = ref('')
 const forced = ref(false)
 let otpCount = 0
 let otpId = ''
-
-const isMobile = useMediaQuery('(max-width: 425px)')
 
 const setToLogin = () => {
   // reset email and password
@@ -80,6 +76,21 @@ const _setUser = async (data, decoded) => {
   // store user
   await store.doLogin(decoded)
   // id, groups, access_token, refresh_token
+}
+
+const getErrorMessage = async (e, fallback = 'Error') => {
+  if (e?.data?.message) return e.data.message
+  if (e?.message && e.message !== '[object Response]') return e.message
+  if (e && typeof e === 'object' && typeof e.json === 'function') {
+    try {
+      const response = typeof e.clone === 'function' ? e.clone() : e
+      const payload = await response.json()
+      if (payload?.message) return payload.message
+    } catch (_) {}
+    if (e.statusText) return `${e.status} ${e.statusText}`.trim()
+  }
+  if (typeof e === 'string') return e
+  return fallback
 }
 
 const login = async () => {
@@ -116,7 +127,7 @@ const login = async () => {
     // fetch failed
     // auth failed
     console.log('login error', e.toString(), e)
-    errorMessage.value = e?.data?.message || e.toString()
+    errorMessage.value = await getErrorMessage(e, 'Login Error')
   }
   store.loading = false
 }
@@ -134,12 +145,13 @@ const otpLogin = async () => {
     http.setOptions({ refreshUrl: VITE_REFRESH_URL })
     _setUser(data, decoded)
   } catch (e) {
-    if (e.data.message === 'Token Expired Error') {
+    const message = await getErrorMessage(e, 'OTP Error')
+    if (message === 'Token Expired Error') {
       errorMessage.value = 'OTP Expired'
       setToLogin()
     } else if (otpCount < 3) {
       otpCount++
-      errorMessage.value = 'OTP Error'
+      errorMessage.value = message
     } else {
       errorMessage.value = 'OTP Tries Exceeded'
       setToLogin()
