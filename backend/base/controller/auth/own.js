@@ -47,6 +47,11 @@ const refresh = async (req, res) => {
   return res.status(401).json({ message: 'Error token revoked' })
 }
 
+const toTokenUser = (user) => ({
+  ...user,
+  [AUTH_USER_FIELD_ID_FOR_JWT]: String(user[AUTH_USER_FIELD_ID_FOR_JWT])
+})
+
 
 const login = async (req, res) => {
   try {
@@ -64,7 +69,7 @@ const login = async (req, res) => {
       // Fido2 can be added in future
       return res.status(200).json({ otp: id })
     }
-    const tokens = await createToken(user) // 5 minute expire for login
+    const tokens = await createToken(toTokenUser(user)) // 5 minute expire for login
     setTokensToHeader(res, tokens)
     return res.status(200).json(tokens)
   } catch (e) {
@@ -76,11 +81,12 @@ const login = async (req, res) => {
 const otp = async (req, res) => { // need to be authentication, body { id: '', pin: '123456' }
   try {
     const { id, pin } = req.body
-    const user = await authFns.findUser({ id })
+    const authIdField = AUTH_USER_FIELD_ID_FOR_JWT || 'id'
+    const user = await authFns.findUser({ [authIdField]: id })
     if (user) {
       const gaKey = user[AUTH_USER_FIELD_GAKEY]
       if (USE_OTP !== 'TEST' ? otplib.authenticator.check(pin, gaKey) : String(pin) === '111111') { // NOTE: expiry will be determined by authenticator itself
-        const tokens = await createToken(user)
+        const tokens = await createToken(toTokenUser(user))
         setTokensToHeader(res, tokens)
         return res.status(200).json(tokens)
       } else {
