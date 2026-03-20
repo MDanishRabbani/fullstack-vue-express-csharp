@@ -17,12 +17,15 @@ public class TodosController : ControllerBase
     }
 
     [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<TodoItem>), StatusCodes.Status200OK)]
     public ActionResult<IEnumerable<TodoItem>> GetAll()
     {
         return Ok(_todoService.GetAll());
     }
 
     [HttpGet("{id:int}")]
+    [ProducesResponseType(typeof(TodoItem), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public ActionResult<TodoItem> GetById(int id)
     {
         var item = _todoService.GetById(id);
@@ -31,6 +34,8 @@ public class TodosController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(typeof(TodoItem), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public ActionResult<TodoItem> Create([FromBody] CreateTodoRequest request)
     {
         var item = _todoService.Create(request);
@@ -38,6 +43,9 @@ public class TodosController : ControllerBase
     }
 
     [HttpPut("{id:int}")]
+    [ProducesResponseType(typeof(TodoItem), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public ActionResult<TodoItem> Update(int id, [FromBody] CreateTodoRequest request)
     {
         var item = _todoService.Update(id, request);
@@ -46,6 +54,8 @@ public class TodosController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult Delete(int id)
     {
         var removed = _todoService.Delete(id);
