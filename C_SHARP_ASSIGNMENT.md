@@ -2,8 +2,7 @@
 
 This repository now includes:
 
-- `csharp-rest-api` (ASP.NET Core REST API)
-- `csharp-websocket-app` (ASP.NET Core WebSocket app)
+- `csharp-rest-api` (ASP.NET Core REST API + WebSocket endpoint in one project)
 
 ## 1) REST API
 
@@ -28,13 +27,13 @@ Swagger UI (development):
 
 - `http://localhost:5001/swagger`
 
-## 2) WebSocket App
+## 2) WebSocket (same project)
 
 Run locally:
 
 ```bash
-cd csharp-websocket-app
-dotnet run --urls http://0.0.0.0:5002
+cd csharp-rest-api
+dotnet run --urls http://0.0.0.0:5001
 ```
 
 Key endpoints:
@@ -46,7 +45,7 @@ Key endpoints:
 Quick test using `wscat`:
 
 ```bash
-npx wscat -c ws://127.0.0.1:5002/ws
+npx wscat -c ws://127.0.0.1:5001/ws
 ```
 
 ## 3) Linux Deployment (simple)
@@ -55,14 +54,12 @@ Publish binaries:
 
 ```bash
 dotnet publish csharp-rest-api -c Release -o out/rest
-dotnet publish csharp-websocket-app -c Release -o out/ws
 ```
 
-Run published apps:
+Run published app:
 
 ```bash
 ASPNETCORE_URLS=http://0.0.0.0:5001 ./out/rest/csharp-rest-api
-ASPNETCORE_URLS=http://0.0.0.0:5002 ./out/ws/csharp-websocket-app
 ```
 
 For production, run them as managed services (systemd or containers), put them behind Nginx, and enable structured logging + monitoring.
