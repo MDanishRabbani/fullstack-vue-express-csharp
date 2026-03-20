@@ -1,6 +1,6 @@
 # Demo Guide
 
-## A) Demo Vue + Express
+## A) Vue + Express Demo
 
 ### 1. Start backend
 
@@ -22,9 +22,9 @@ npm run sample
 - Username: `test`
 - Password: `test`
 - OTP: `111111`
-- Expected: redirect ke Dashboard
+- Expected: redirect to Dashboard
 
-## B) Demo C# REST + WebSocket (single project)
+## B) C# REST + WebSocket Demo (single project)
 
 ### 1. Start app
 
@@ -33,14 +33,14 @@ cd csharp-rest-api
 dotnet run --urls http://127.0.0.1:5101
 ```
 
-### 2. Health & REST checks
+### 2. Health and REST checks
 
 ```bash
 curl -s http://127.0.0.1:5101/healthz
 curl -s http://127.0.0.1:5101/api/todos
 ```
 
-### 3. Open 2 websocket clients
+### 3. Open 2 WebSocket clients
 
 Terminal A:
 
@@ -68,14 +68,14 @@ curl -s -X PUT http://127.0.0.1:5101/api/todos/1 \
 curl -s -X DELETE http://127.0.0.1:5101/api/todos/2
 ```
 
-Expected di client A/B:
+Expected on both clients:
 
 - `todo.created`
 - `todo.updated`
 - `todo.deleted`
 
-## C) Talking points (interview)
+## C) Interview Talking Points
 
-- REST layer untuk CRUD data
-- WebSocket layer untuk event realtime tanpa polling
-- `CreatedAtUtc` dan `UpdatedAtUtc` pada todo untuk audit trail ringan
+- REST layer handles CRUD operations
+- WebSocket layer handles realtime event delivery without polling
+- `CreatedAtUtc` and `UpdatedAtUtc` provide simple audit metadata for todo items

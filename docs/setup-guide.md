@@ -1,13 +1,13 @@
 # Setup Guide
 
-Guide ini mencakup setup semua project di repository ini pada Linux/WSL Ubuntu.
+This guide covers setup for all projects in this repository on Linux/WSL Ubuntu.
 
 ## Prerequisites
 
-- Node.js 22+ dan npm 10+
+- Node.js 22+ and npm 10+
 - .NET SDK 8
 - Git
-- Optional: `wscat` untuk test websocket (`npm i -g wscat`)
+- Optional: `wscat` for WebSocket testing (`npm i -g wscat`)
 
 ## 1) Backend (Express)
 
@@ -22,10 +22,10 @@ Default backend:
 - API: `http://127.0.0.1:3000`
 - WS: `ws://127.0.0.1:3001`
 
-Catatan:
+Notes:
 
-- Konfigurasi env ada di `backend/apps/.env.development`
-- OTP test mode menggunakan `111111` saat `USE_OTP=TEST`
+- Environment config is in `backend/apps/.env.development`
+- OTP test mode uses `111111` when `USE_OTP=TEST`
 
 ## 2) Frontend (Vue)
 
@@ -39,12 +39,12 @@ Frontend URL:
 
 - `http://127.0.0.1:8080`
 
-Catatan:
+Notes:
 
-- Proxy dev frontend sudah diarahkan ke backend lokal (`127.0.0.1:3000`)
-- Login sample: `test / test`, lalu OTP `111111`
+- Frontend dev proxy is configured to local backend (`127.0.0.1:3000`)
+- Sample login: `test / test`, then OTP `111111`
 
-## 3) C# REST API (+ WebSocket dalam project yang sama)
+## 3) C# REST API (+ WebSocket in the same project)
 
 ```bash
 cd csharp-rest-api
@@ -71,4 +71,4 @@ cd ../frontend && npm run -s test || true
 cd ../csharp-rest-api && dotnet build
 ```
 
-> Beberapa script frontend/backend di template ini bersifat sample; yang wajib untuk assignment adalah app bisa dijalankan dan didemokan.
+> Some frontend/backend scripts in these templates are sample-oriented; for the assignment, the key requirement is that apps run and can be demonstrated successfully.
