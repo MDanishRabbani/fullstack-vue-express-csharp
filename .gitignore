@@ -1,0 +1,9 @@
+# .NET build outputs
+**/bin/
+**/obj/
+
+# IDE/editor files
+*.user
+*.suo
+*.swp
+*.DS_Store
