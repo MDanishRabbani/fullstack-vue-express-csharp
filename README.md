@@ -1,46 +1,65 @@
 # fullstack-vue-express-csharp
 
-Repository ini berisi implementasi assignment:
+This repository contains the assignment implementation:
 
-- VueJS + ExpressJS (login sampai dashboard)
+- VueJS + ExpressJS (login flow to dashboard)
 - C# REST API
-- C# WebSocket realtime (terintegrasi di project REST)
+- C# WebSocket realtime integration (inside the REST project)
 
 ## Project Structure
 
 - `backend/` - Express template backend
 - `frontend/` - Vue + Antd template frontend
 - `csharp-rest-api/` - ASP.NET Core REST API + WebSocket (`/ws`)
-- `docs/` - setup dan demo guide
+- `docs/` - setup and demo guides
 
 ## Quick Start
 
-Lihat dokumentasi:
+See the documentation:
 
 - [Setup Guide](docs/setup-guide.md)
 - [Demo Guide](docs/demo-guide.md)
+
+## Documentation
+
+- Step-by-step setup: [docs/setup-guide.md](docs/setup-guide.md)
+- Step-by-step demo: [docs/demo-guide.md](docs/demo-guide.md)
+
+## Demo Screenshots
+
+### Architecture Overview
+
+![Architecture Overview](docs/screenshots/architecture-overview.svg)
+
+### REST API Demo Flow
+
+![REST API Demo Flow](docs/screenshots/rest-api-demo-flow.svg)
+
+### WebSocket Demo Flow
+
+![WebSocket Demo Flow](docs/screenshots/websocket-demo-flow.svg)
 
 ## Implemented Highlights
 
 ### Vue + Express
 
-- Backend dan frontend berjalan lokal
-- Konfigurasi OTP test flow stabil (`111111`)
-- Login dari frontend sukses ke dashboard
-- Error handling signin lebih jelas
+- Backend and frontend run locally
+- OTP test flow is stable (`111111`)
+- Frontend login successfully reaches dashboard
+- Sign in error handling is clearer
 
 ### C# REST API
 
-- CRUD endpoint `/api/todos`
+- CRUD endpoints at `/api/todos`
 - Audit fields: `CreatedAtUtc`, `UpdatedAtUtc`
 - Health endpoint `/healthz`
-- Swagger aktif saat development
+- Swagger enabled in development
 
 ### Realtime WebSocket
 
 - Endpoint `ws://<host>/ws`
-- Broadcast event saat todo create/update/delete
-- Event `client.joined` dan `client.left`
+- Broadcast events for todo create/update/delete
+- Connection events: `client.joined` and `client.left`
 
 ## Demo Credentials (Vue + Express sample)
 
@@ -50,5 +69,5 @@ Lihat dokumentasi:
 
 ## Notes
 
-- Repository ini disiapkan untuk demo di Linux/WSL sesuai assignment.
-- Screenshot hasil demo bisa ditaruh di `docs/screenshots/`.
+- This repository is prepared for Linux/WSL demo scenarios.
+- Demo images are stored in `docs/screenshots/`.
