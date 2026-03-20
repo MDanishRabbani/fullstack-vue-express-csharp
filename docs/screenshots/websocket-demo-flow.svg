@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#f8fafc"/>
+  <text x="60" y="70" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#0f172a">
+    WebSocket Realtime Demo Flow
+  </text>
+
+  <rect x="70" y="130" rx="12" ry="12" width="1060" height="510" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+
+  <rect x="110" y="180" rx="10" ry="10" width="280" height="130" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="130" y="218" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#1e3a8a">Client A</text>
+  <text x="130" y="248" font-family="Consolas, monospace" font-size="16" fill="#1e3a8a">wscat -c ws://127.0.0.1:5101/ws</text>
+  <text x="130" y="275" font-family="Arial, sans-serif" font-size="15" fill="#1e3a8a">receives events</text>
+
+  <rect x="810" y="180" rx="10" ry="10" width="280" height="130" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="830" y="218" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#1e3a8a">Client B</text>
+  <text x="830" y="248" font-family="Consolas, monospace" font-size="16" fill="#1e3a8a">wscat -c ws://127.0.0.1:5101/ws</text>
+  <text x="830" y="275" font-family="Arial, sans-serif" font-size="15" fill="#1e3a8a">receives same events</text>
+
+  <rect x="430" y="170" rx="10" ry="10" width="340" height="150" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="450" y="208" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#14532d">csharp-rest-api</text>
+  <text x="450" y="238" font-family="Arial, sans-serif" font-size="16" fill="#14532d">WebSocket endpoint: /ws</text>
+  <text x="450" y="264" font-family="Arial, sans-serif" font-size="16" fill="#14532d">Broadcast events to all clients</text>
+  <text x="450" y="290" font-family="Arial, sans-serif" font-size="16" fill="#14532d">client.joined / client.left / todo.*</text>
+
+  <line x1="390" y1="245" x2="430" y2="245" stroke="#334155" stroke-width="3"/>
+  <polygon points="428,238 442,245 428,252" fill="#334155"/>
+  <line x1="770" y1="245" x2="810" y2="245" stroke="#334155" stroke-width="3"/>
+  <polygon points="808,238 822,245 808,252" fill="#334155"/>
+
+  <rect x="110" y="390" rx="10" ry="10" width="980" height="190" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text x="140" y="430" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#7c2d12">Trigger from REST API</text>
+  <text x="140" y="465" font-family="Consolas, monospace" font-size="18" fill="#7c2d12">POST /api/todos    -> event: todo.created</text>
+  <text x="140" y="495" font-family="Consolas, monospace" font-size="18" fill="#7c2d12">PUT  /api/todos/1  -> event: todo.updated</text>
+  <text x="140" y="525" font-family="Consolas, monospace" font-size="18" fill="#7c2d12">DELETE /api/todos/2 -> event: todo.deleted</text>
+  <text x="140" y="555" font-family="Arial, sans-serif" font-size="16" fill="#7c2d12">Expected: event yang sama muncul di Client A dan Client B tanpa refresh.</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" fill="#f8fafc"/>
+  <text x="60" y="70" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#0f172a">
+    REST API Demo Flow
+  </text>
+
+  <rect x="70" y="130" rx="12" ry="12" width="1060" height="510" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+
+  <rect x="110" y="180" rx="10" ry="10" width="980" height="80" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="140" y="228" font-family="Consolas, monospace" font-size="20" fill="#0c4a6e">GET /healthz  -> Healthy</text>
+
+  <rect x="110" y="280" rx="10" ry="10" width="980" height="80" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="140" y="328" font-family="Consolas, monospace" font-size="20" fill="#14532d">GET /api/todos  -> list todo items (with CreatedAtUtc, UpdatedAtUtc)</text>
+
+  <rect x="110" y="380" rx="10" ry="10" width="980" height="80" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="140" y="428" font-family="Consolas, monospace" font-size="20" fill="#78350f">POST /api/todos  -> create todo + set audit fields</text>
+
+  <rect x="110" y="480" rx="10" ry="10" width="980" height="80" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="140" y="528" font-family="Consolas, monospace" font-size="20" fill="#7f1d1d">PUT /api/todos/{id}  -> update todo + refresh UpdatedAtUtc</text>
+
+  <text x="110" y="610" font-family="Arial, sans-serif" font-size="18" fill="#334155">
+    Endpoint base: http://127.0.0.1:5001
+  </text>
+</svg>

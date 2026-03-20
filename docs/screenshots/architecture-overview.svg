@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+  <rect width="1200" height="720" fill="#f6f8fb"/>
+  <text x="60" y="70" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#1f2937">
+    Fullstack Vue + Express + C# Architecture
+  </text>
+  <text x="60" y="105" font-family="Arial, sans-serif" font-size="18" fill="#475569">
+    Assignment Demo Overview
+  </text>
+
+  <rect x="70" y="160" rx="14" ry="14" width="300" height="170" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="95" y="205" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#0c4a6e">Frontend</text>
+  <text x="95" y="238" font-family="Arial, sans-serif" font-size="18" fill="#0c4a6e">Vue + Ant Design</text>
+  <text x="95" y="268" font-family="Arial, sans-serif" font-size="16" fill="#0c4a6e">http://127.0.0.1:8080</text>
+  <text x="95" y="295" font-family="Arial, sans-serif" font-size="16" fill="#0c4a6e">Login + Dashboard</text>
+
+  <rect x="450" y="160" rx="14" ry="14" width="300" height="170" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="475" y="205" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#14532d">Backend</text>
+  <text x="475" y="238" font-family="Arial, sans-serif" font-size="18" fill="#14532d">ExpressJS</text>
+  <text x="475" y="268" font-family="Arial, sans-serif" font-size="16" fill="#14532d">http://127.0.0.1:3000</text>
+  <text x="475" y="295" font-family="Arial, sans-serif" font-size="16" fill="#14532d">Auth + OTP (111111)</text>
+
+  <rect x="830" y="160" rx="14" ry="14" width="300" height="170" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="855" y="205" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#78350f">C# API</text>
+  <text x="855" y="238" font-family="Arial, sans-serif" font-size="18" fill="#78350f">ASP.NET Core</text>
+  <text x="855" y="268" font-family="Arial, sans-serif" font-size="16" fill="#78350f">http://127.0.0.1:5001</text>
+  <text x="855" y="295" font-family="Arial, sans-serif" font-size="16" fill="#78350f">REST + WebSocket (/ws)</text>
+
+  <line x1="370" y1="245" x2="450" y2="245" stroke="#334155" stroke-width="3"/>
+  <polygon points="448,238 462,245 448,252" fill="#334155"/>
+
+  <line x1="750" y1="245" x2="830" y2="245" stroke="#334155" stroke-width="3"/>
+  <polygon points="828,238 842,245 828,252" fill="#334155"/>
+
+  <rect x="70" y="400" rx="14" ry="14" width="1060" height="230" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="95" y="445" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1e293b">Realtime Flow (C# Single Project)</text>
+
+  <rect x="95" y="470" rx="10" ry="10" width="280" height="130" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="115" y="505" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#1e3a8a">REST CRUD</text>
+  <text x="115" y="535" font-family="Arial, sans-serif" font-size="16" fill="#1e3a8a">POST /api/todos</text>
+  <text x="115" y="560" font-family="Arial, sans-serif" font-size="16" fill="#1e3a8a">PUT /api/todos/{id}</text>
+  <text x="115" y="585" font-family="Arial, sans-serif" font-size="16" fill="#1e3a8a">DELETE /api/todos/{id}</text>
+
+  <rect x="460" y="470" rx="10" ry="10" width="300" height="130" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="480" y="505" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#14532d">Broadcast Event</text>
+  <text x="480" y="535" font-family="Arial, sans-serif" font-size="16" fill="#14532d">todo.created</text>
+  <text x="480" y="560" font-family="Arial, sans-serif" font-size="16" fill="#14532d">todo.updated</text>
+  <text x="480" y="585" font-family="Arial, sans-serif" font-size="16" fill="#14532d">todo.deleted</text>
+
+  <rect x="845" y="470" rx="10" ry="10" width="260" height="130" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text x="865" y="505" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#7c2d12">WS Clients</text>
+  <text x="865" y="535" font-family="Arial, sans-serif" font-size="16" fill="#7c2d12">wscat client A</text>
+  <text x="865" y="560" font-family="Arial, sans-serif" font-size="16" fill="#7c2d12">wscat client B</text>
+  <text x="865" y="585" font-family="Arial, sans-serif" font-size="16" fill="#7c2d12">UI subscribers</text>
+
+  <line x1="375" y1="535" x2="460" y2="535" stroke="#334155" stroke-width="3"/>
+  <polygon points="458,528 472,535 458,542" fill="#334155"/>
+  <line x1="760" y1="535" x2="845" y2="535" stroke="#334155" stroke-width="3"/>
+  <polygon points="843,528 857,535 843,542" fill="#334155"/>
+</svg>
