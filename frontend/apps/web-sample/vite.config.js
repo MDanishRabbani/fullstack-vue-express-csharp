@@ -52,8 +52,27 @@ export default ({ command, mode }) => {
       }
     },
     server: {
-      host: '127.0.0.1',
-      port: 8080
+      host: '0.0.0.0',
+      port: 8080,
+      proxy: {
+        '/api': {
+          target: 'http://127.0.0.1:3000',
+          changeOrigin: true,
+          secure: false,
+          ws: true
+        },
+        '/auth': {
+          target: 'http://127.0.0.1:3000',
+          changeOrigin: true,
+          secure: false,
+          ws: true
+        },
+        '/docs': {
+          target: 'http://127.0.0.1:3000',
+          changeOrigin: true,
+          secure: false
+        }
+      }
     }
   }
 }
