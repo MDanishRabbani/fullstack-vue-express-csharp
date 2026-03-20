@@ -7,8 +7,22 @@ public sealed class InMemoryTodoService : ITodoService
 {
     private readonly List<TodoItem> _items =
     [
-        new TodoItem { Id = 1, Title = "Run backend", IsDone = true },
-        new TodoItem { Id = 2, Title = "Run frontend", IsDone = true }
+        new TodoItem
+        {
+            Id = 1,
+            Title = "Run backend",
+            IsDone = true,
+            CreatedAtUtc = DateTime.UtcNow,
+            UpdatedAtUtc = DateTime.UtcNow
+        },
+        new TodoItem
+        {
+            Id = 2,
+            Title = "Run frontend",
+            IsDone = true,
+            CreatedAtUtc = DateTime.UtcNow,
+            UpdatedAtUtc = DateTime.UtcNow
+        }
     ];
 
     private readonly object _sync = new();
@@ -37,12 +51,15 @@ public sealed class InMemoryTodoService : ITodoService
     {
         lock (_sync)
         {
+            var now = DateTime.UtcNow;
             var nextId = _items.Count == 0 ? 1 : _items.Max(x => x.Id) + 1;
             var item = new TodoItem
             {
                 Id = nextId,
                 Title = request.Title.Trim(),
-                IsDone = request.IsDone
+                IsDone = request.IsDone,
+                CreatedAtUtc = now,
+                UpdatedAtUtc = now
             };
 
             _items.Add(item);
@@ -59,6 +76,7 @@ public sealed class InMemoryTodoService : ITodoService
 
             item.Title = request.Title.Trim();
             item.IsDone = request.IsDone;
+            item.UpdatedAtUtc = DateTime.UtcNow;
             return Clone(item);
         }
     }
@@ -78,6 +96,9 @@ public sealed class InMemoryTodoService : ITodoService
     {
         Id = item.Id,
         Title = item.Title,
-        IsDone = item.IsDone
+        IsDone = item.IsDone,
+        CreatedAtUtc = item.CreatedAtUtc,
+        UpdatedAtUtc = item.UpdatedAtUtc
     };
+
 }
