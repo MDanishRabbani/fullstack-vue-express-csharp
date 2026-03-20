@@ -10,10 +10,12 @@ namespace csharp_rest_api.Controllers;
 public class TodosController : ControllerBase
 {
     private readonly ITodoService _todoService;
+    private readonly IRealtimeNotifier _realtimeNotifier;
 
-    public TodosController(ITodoService todoService)
+    public TodosController(ITodoService todoService, IRealtimeNotifier realtimeNotifier)
     {
         _todoService = todoService;
+        _realtimeNotifier = realtimeNotifier;
     }
 
     [HttpGet]
@@ -36,9 +38,10 @@ public class TodosController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(TodoItem), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<TodoItem> Create([FromBody] CreateTodoRequest request)
+    public async Task<ActionResult<TodoItem>> Create([FromBody] CreateTodoRequest request)
     {
         var item = _todoService.Create(request);
+        await _realtimeNotifier.BroadcastAsync("todo.created", item);
         return CreatedAtAction(nameof(GetById), new { id = item.Id }, item);
     }
 
@@ -46,20 +49,22 @@ public class TodosController : ControllerBase
     [ProducesResponseType(typeof(TodoItem), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<TodoItem> Update(int id, [FromBody] CreateTodoRequest request)
+    public async Task<ActionResult<TodoItem>> Update(int id, [FromBody] CreateTodoRequest request)
     {
         var item = _todoService.Update(id, request);
         if (item is null) return NotFound();
+        await _realtimeNotifier.BroadcastAsync("todo.updated", item);
         return Ok(item);
     }
 
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
         var removed = _todoService.Delete(id);
         if (!removed) return NotFound();
+        await _realtimeNotifier.BroadcastAsync("todo.deleted", new { id });
         return NoContent();
     }
 }

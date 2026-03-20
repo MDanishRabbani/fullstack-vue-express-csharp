@@ -8,6 +8,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 builder.Services.AddProblemDetails();
 builder.Services.AddSingleton<ITodoService, InMemoryTodoService>();
+builder.Services.AddSingleton<IRealtimeNotifier, WebSocketRealtimeNotifier>();
 
 var app = builder.Build();
 
@@ -18,14 +19,20 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseExceptionHandler();
+app.UseWebSockets();
 app.UseAuthorization();
 
 app.MapControllers();
 app.MapHealthChecks("/healthz");
+app.Map("/ws", async (HttpContext context, IRealtimeNotifier realtimeNotifier) =>
+{
+    await realtimeNotifier.HandleConnectionAsync(context);
+});
 app.MapGet("/", () => Results.Ok(new
 {
     service = "csharp-rest-api",
-    status = "ok"
+    status = "ok",
+    websocketPath = "/ws"
 }));
 
 app.Run();
